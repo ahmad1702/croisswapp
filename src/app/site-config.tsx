@@ -10,8 +10,8 @@ export const siteConfig = {
             href: "/",
         },
         {
-            title: "Docs",
-            href: "/docs/introduction",
+            title: "JSX <-> JSON",
+            href: "https://www.npmjs.com/package/jsx-to-json",
         },
     ],
     sidebarNav: [
@@ -21,7 +21,12 @@ export const siteConfig = {
                 {
                     title: "Introduction",
                     href: "/docs/introduction",
-                    items: [],
+                    items: [
+                        {
+                            title: "What is Jupyswapp?",
+                            href: "/docs/introduction#what-is-jupyswapp",
+                        }
+                    ],
                 },
                 {
                     title: "Installation",
