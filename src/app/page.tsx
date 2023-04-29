@@ -1,28 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client"
-import {
-    Menubar,
-    MenubarCheckboxItem,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarRadioGroup,
-    MenubarRadioItem,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarSub,
-    MenubarSubContent,
-    MenubarSubTrigger,
-    MenubarTrigger,
-} from "@/components/ui/menubar";
+import EditorToolbar from '@/components/EditorToolbar';
 import { Copy, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import Balancer from "react-wrap-balancer";
 
 import { siteConfig } from "@/app/site-config";
+import PythonFromJupyter from "@/components/PythonFromJupyter";
 import ShowHide from "@/components/ui/show-hide";
 import { Textarea } from "@/components/ui/text-area";
 import { cn } from "@/utils/cn";
-import pythonToJupyter from "@/utils/pythonToJupyter";
 
 const PyHeader = () => {
     return (
@@ -89,7 +79,7 @@ const JupyterNotebookEditorToolbar = ({
                         "focus:outline-none focus-visible:ring focus-visible:ring-accent-foreground focus-visible:ring-opacity-50",
                     )}
                     onClick={() => {
-                        navigator.clipboard.writeText(fromContents)
+                        void navigator.clipboard.writeText(fromContents)
                     }}
                 >
                     <Copy className="h-4 w-4" />
@@ -103,7 +93,7 @@ const JupyterNotebookEditorToolbar = ({
                         "focus:outline-none focus-visible:ring focus-visible:ring-accent-foreground focus-visible:ring-opacity-50",
                     )}
                     onClick={() => {
-                        navigator.clipboard.writeText(toContents)
+                        void navigator.clipboard.writeText(toContents)
                     }}
                 >
                     <Copy className="h-4 w-4" />
@@ -138,115 +128,8 @@ const convertIpynbJsonToPythonFile = (json: any) => {
     return code
 }
 
-const EditorToolbar = ({
-    error = 'This is an error. Please fix it.',
-    editMode,
-    setEditMode,
-    fromContents,
-    setFromContents,
-    toContents,
-}: {
-    error: string | undefined;
-    editMode: EditMode;
-    setEditMode: React.Dispatch<React.SetStateAction<EditMode>>;
-    fromContents: string;
-    setFromContents: React.Dispatch<React.SetStateAction<string>>;
-    toContents: string;
-}) => {
-    return (
-        <div className="flex justify-between items-center border rounded-md w-full">
-            <Menubar className="bg-none border-none">
-                <MenubarMenu>
-                    <MenubarTrigger>File</MenubarTrigger>
-                    <MenubarContent>
-                        <MenubarItem>
-                            New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarItem>
-                            New Window <MenubarShortcut>⌘N</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarItem disabled>New Incognito Window</MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarSub>
-                            <MenubarSubTrigger>Share</MenubarSubTrigger>
-                            <MenubarSubContent>
-                                <MenubarItem>Email link</MenubarItem>
-                                <MenubarItem>Messages</MenubarItem>
-                                <MenubarItem>Notes</MenubarItem>
-                            </MenubarSubContent>
-                        </MenubarSub>
-                        <MenubarSeparator />
-                        <MenubarItem>
-                            Print... <MenubarShortcut>⌘P</MenubarShortcut>
-                        </MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-                <MenubarMenu>
-                    <MenubarTrigger>Edit</MenubarTrigger>
-                    <MenubarContent>
-                        <MenubarItem>
-                            Undo <MenubarShortcut>⌘Z</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarItem>
-                            Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarSub>
-                            <MenubarSubTrigger>Find</MenubarSubTrigger>
-                            <MenubarSubContent>
-                                <MenubarItem>Search the web</MenubarItem>
-                                <MenubarSeparator />
-                                <MenubarItem>Find...</MenubarItem>
-                                <MenubarItem>Find Next</MenubarItem>
-                                <MenubarItem>Find Previous</MenubarItem>
-                            </MenubarSubContent>
-                        </MenubarSub>
-                        <MenubarSeparator />
-                        <MenubarItem>Cut</MenubarItem>
-                        <MenubarItem>Copy</MenubarItem>
-                        <MenubarItem>Paste</MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-                <MenubarMenu>
-                    <MenubarTrigger>View</MenubarTrigger>
-                    <MenubarContent>
-                        <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>
-                        <MenubarCheckboxItem checked>
-                            Always Show Full URLs
-                        </MenubarCheckboxItem>
-                        <MenubarSeparator />
-                        <MenubarItem inset>
-                            Reload <MenubarShortcut>⌘R</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarItem disabled inset>
-                            Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarItem inset>Toggle Fullscreen</MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarItem inset>Hide Sidebar</MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-                <MenubarMenu>
-                    <MenubarTrigger>Profiles</MenubarTrigger>
-                    <MenubarContent>
-                        <MenubarRadioGroup value="benoit">
-                            <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                            <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-                            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-                        </MenubarRadioGroup>
-                        <MenubarSeparator />
-                        <MenubarItem inset>Edit...</MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarItem inset>Add Profile...</MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-            </Menubar>
-        </div>
-    )
-}
 
-type EditMode = 'jupyter-to-py' | 'py-to-jupyter' | 'none'
+export type EditMode = 'jupyter-to-py' | 'py-to-jupyter' | 'none'
 export default function IndexPage() {
     const [error, setError] = useState<string | undefined>(undefined)
     const [editMode, setEditMode] = useState<EditMode>('none')
@@ -268,34 +151,34 @@ export default function IndexPage() {
 
         setFromContents(e.target.value)
     }
-    const toContents: string | null = useMemo(() => {
-        setError(undefined)
-        try {
-            if (editMode === 'jupyter-to-py') {
-                return convertIpynbJsonToPythonFile(JSON.parse(fromContents))
-            } else if (editMode === 'py-to-jupyter') {
-                return JSON.stringify(pythonToJupyter(fromContents), null, 2)
-            }
-        } catch (error) {
-            const errorStr = JSON.stringify(error)
-            if (error && error !== '' && errorStr !== '{ }' && errorStr !== '[]' && errorStr !== '""' && errorStr !== 'null' && errorStr !== 'undefined' && !errorStr.includes('SyntaxError')) {
-                setError(JSON.stringify(error))
-            }
-        }
-        return null
-    }, [editMode, fromContents])
+    // const toContents: string | null = useMemo(() => {
+    //     setError(undefined)
+    //     try {
+    //         if (editMode === 'jupyter-to-py') {
+    //             return convertIpynbJsonToPythonFile(JSON.parse(fromContents))
+    //         } else if (editMode === 'py-to-jupyter') {
+    //             return JSON.stringify(pythonToJupyter(fromContents), null, 2)
+    //         }
+    //     } catch (error) {
+    //         const errorStr = JSON.stringify(error)
+    //         if (error && error !== '' && errorStr !== '{ }' && errorStr !== '[]' && errorStr !== '""' && errorStr !== 'null' && errorStr !== 'undefined' && !errorStr.includes('SyntaxError')) {
+    //             setError(JSON.stringify(error))
+    //         }
+    //     }
+    //     return null
+    // }, [editMode, fromContents])
 
     const showSecondEditor = useMemo(() => {
-        return editMode !== 'none' && toContents !== null && toContents !== ''
-    }, [editMode, toContents])
+        return editMode !== 'none'
+    }, [editMode])
 
     console.log(showSecondEditor)
 
     return (
         <section
             className={cn(
-                "overflow-hidden min-h-[calc(100vh-4rem)] flex items-center flex-col",
-                showSecondEditor ? 'p-5 gap-4' : 'container gap-6 pb-8 pt-6 md:py-10',
+                "overflow-hidden min-h-[calc(100vh-4rem)] flex items-center flex-col container",
+                showSecondEditor ? 'p-5 gap-4' : 'gap-6 pb-8 pt-6 md:py-10',
             )}
         >
             <ShowHide show={!showSecondEditor}>
@@ -308,7 +191,6 @@ export default function IndexPage() {
                     setEditMode={setEditMode}
                     fromContents={fromContents}
                     setFromContents={setFromContents}
-                    toContents={toContents || ''}
                 />
             </ShowHide>
             <div className="w-full flex-1 flex flex-col items-center justify-center gap-2">
@@ -331,13 +213,12 @@ export default function IndexPage() {
                             showSecondEditor ? 'w-1/2' : 'w-0'
                         )}
                     >
-                        <Textarea
-                            readOnly
-                            value={toContents || ''}
-                            className={cn("h-full resize-none", showSecondEditor ? 'opacity-100' : 'opacity-0')}
-                            placeholder="Drag and drop or Paste in the contents of a .ipynb or .py file here"
-                            onChange={handleFromContentsChange}
-                        />
+                        {editMode === 'py-to-jupyter' ? (
+                            <div>Not implemented yet</div>
+                            // <JupyterNotebookViewer pythonCode={fromContents} />
+                        ) : (
+                            <PythonFromJupyter ipynbJson={fromContents} />
+                        )}
                     </div>
                 </div>
             </div>

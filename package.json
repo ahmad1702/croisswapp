@@ -34,6 +34,7 @@
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-ipynb-renderer": "^2.0.1",
     "react-wrap-balancer": "^0.4.0",
     "superjson": "1.12.2",
     "tailwind-merge": "^1.12.0",
