@@ -279,7 +279,7 @@ export interface DisplayData {
     /**
      * mimetype output (e.g. text/plain), represented as either an array of strings or a string.
      */
-    [k: string]: string | string[];
+    [k: string]: any;
   };
   /**
    * Cell output metadata.

@@ -9,10 +9,11 @@ import { useState } from "react";
 import Balancer from "react-wrap-balancer";
 
 import { siteConfig } from "@/app/site-config";
-import JupyterToPython from "@/components/JupyterToPython";
+import JupyterToPython from '@/components/JupyterToPython';
 import PythonToJupyter from '@/components/PythonToJupyter';
 import ShowHide from "@/components/ui/show-hide";
 import { Textarea } from "@/components/ui/text-area";
+import { sampleJupyterNotebook } from '@/data/sampleJupyterNotebook';
 import { cn } from "@/utils/cn";
 
 const PyHeader = () => {
@@ -134,7 +135,7 @@ export type EditMode = 'jupyter-to-py' | 'py-to-jupyter' | 'none'
 export default function IndexPage() {
   const [error, setError] = useState<string | undefined>(undefined)
   const [editMode, setEditMode] = useState<EditMode>('none')
-  const [fromContents, setFromContents] = useState('')
+  const [fromContents, setFromContents] = useState(sampleJupyterNotebook)
 
 
   const handleFromContentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -158,7 +159,7 @@ export default function IndexPage() {
   return (
     <section
       className={cn(
-        "overflow-hidden min-h-[calc(100vh-4rem)] flex items-center flex-col container",
+        "overflow-hidden h-[calc(100vh-4rem)] flex items-center flex-col container",
         showSecondEditor ? 'p-5 gap-4' : 'gap-6 pb-8 pt-6 md:py-10',
       )}
     >
@@ -191,7 +192,7 @@ export default function IndexPage() {
           </div>
           <div
             className={cn(
-              "duration-500",
+              "duration-500 h-full",
               showSecondEditor ? 'w-1/2' : 'w-0'
             )}
           >
@@ -199,6 +200,7 @@ export default function IndexPage() {
               editMode === 'py-to-jupyter' ? (
                 <PythonToJupyter pythonCode={fromContents} />
               ) : (
+                // <div>TODO</div>
                 <JupyterToPython ipynbJson={fromContents} />
               )
             )}

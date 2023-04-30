@@ -160,17 +160,20 @@ export function jupyterToPython(jsonStr: string): string | null {
       if (typeof cell.source === "string") {
         pythonCode.push(cell.source);
       } else {
-        pythonCode.push(cell.source.join("\n"));
+        pythonCode.push(cell.source.join(""));
       }
       pythonCode.push("");
     } else if (cell.cell_type === "markdown") {
       let markdown: string;
       if (typeof cell.source === "string") {
-        markdown = cell.source;
+        markdown = cell.source.replaceAll("```", '"""');
       } else {
-        markdown = cell.source.join("\n");
+        markdown = cell.source
+          .filter((line) => line.length > 0 && line !== "\n")
+          .join("")
+          .replaceAll("```", '"""');
       }
-      pythonCode.push(`'''\n${markdown}\n'''`);
+      pythonCode.push(`"""\n${markdown}\n"""`);
       pythonCode.push("");
     }
   }
