@@ -1,126 +1,59 @@
-import { EditMode } from '@/app/page';
-import {
-    Menubar,
-    MenubarCheckboxItem,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarRadioGroup,
-    MenubarRadioItem,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarSub,
-    MenubarSubContent,
-    MenubarSubTrigger,
-    MenubarTrigger,
-} from "@/components/ui/menubar";
-import React from 'react';
+import { Check, Copy, Download, X } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from './ui/button';
 
 type EditorToolbarProps = {
     error: string | undefined;
-    editMode: EditMode;
-    setEditMode: React.Dispatch<React.SetStateAction<EditMode>>;
-    fromContents: string;
-    setFromContents: React.Dispatch<React.SetStateAction<string>>;
+    copy: () => Promise<void>;
+    clear: () => void;
+    download: () => void;
 }
 
 
 const EditorToolbar = ({
     error = 'This is an error. Please fix it.',
-    editMode,
-    setEditMode,
-    fromContents,
-    setFromContents,
+    copy,
+    clear,
+    download
 }: EditorToolbarProps) => {
+    const [copyStatus, setCopyStatus] = useState<'default' | 'loading' | 'complete'>('default')
+    const handleCopy = async (): Promise<void> => {
+        setCopyStatus('loading')
+        await copy()
+        setCopyStatus('complete')
+
+        setTimeout(() => {
+            setCopyStatus('default')
+        }, 1000)
+    }
     return (
-        <div className="flex justify-between items-center border rounded-md w-full">
-            <Menubar className="bg-none border-none">
-                <MenubarMenu>
-                    <MenubarTrigger>File</MenubarTrigger>
-                    <MenubarContent>
-                        <MenubarItem>
-                            New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarItem>
-                            New Window <MenubarShortcut>⌘N</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarItem disabled>New Incognito Window</MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarSub>
-                            <MenubarSubTrigger>Share</MenubarSubTrigger>
-                            <MenubarSubContent>
-                                <MenubarItem>Email link</MenubarItem>
-                                <MenubarItem>Messages</MenubarItem>
-                                <MenubarItem>Notes</MenubarItem>
-                            </MenubarSubContent>
-                        </MenubarSub>
-                        <MenubarSeparator />
-                        <MenubarItem>
-                            Print... <MenubarShortcut>⌘P</MenubarShortcut>
-                        </MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-                <MenubarMenu>
-                    <MenubarTrigger>Edit</MenubarTrigger>
-                    <MenubarContent>
-                        <MenubarItem>
-                            Undo <MenubarShortcut>⌘Z</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarItem>
-                            Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarSub>
-                            <MenubarSubTrigger>Find</MenubarSubTrigger>
-                            <MenubarSubContent>
-                                <MenubarItem>Search the web</MenubarItem>
-                                <MenubarSeparator />
-                                <MenubarItem>Find...</MenubarItem>
-                                <MenubarItem>Find Next</MenubarItem>
-                                <MenubarItem>Find Previous</MenubarItem>
-                            </MenubarSubContent>
-                        </MenubarSub>
-                        <MenubarSeparator />
-                        <MenubarItem>Cut</MenubarItem>
-                        <MenubarItem>Copy</MenubarItem>
-                        <MenubarItem>Paste</MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-                <MenubarMenu>
-                    <MenubarTrigger>View</MenubarTrigger>
-                    <MenubarContent>
-                        <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>
-                        <MenubarCheckboxItem checked>
-                            Always Show Full URLs
-                        </MenubarCheckboxItem>
-                        <MenubarSeparator />
-                        <MenubarItem inset>
-                            Reload <MenubarShortcut>⌘R</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarItem disabled inset>
-                            Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
-                        </MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarItem inset>Toggle Fullscreen</MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarItem inset>Hide Sidebar</MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-                <MenubarMenu>
-                    <MenubarTrigger>Profiles</MenubarTrigger>
-                    <MenubarContent>
-                        <MenubarRadioGroup value="benoit">
-                            <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                            <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-                            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-                        </MenubarRadioGroup>
-                        <MenubarSeparator />
-                        <MenubarItem inset>Edit...</MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarItem inset>Add Profile...</MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-            </Menubar>
+        <div className="flex items-center">
+            <div className='p-1 flex gap-2'>
+                <Button
+                    size="sm"
+                    className='h-7'
+                    onClick={() => void handleCopy()}
+                >
+                    {copyStatus === 'complete' ? <Check className='h-4 w-4 mr-1' /> : <Copy className='h-4 w-4 mr-1' />}
+                    {copyStatus === 'default' ? 'Copy' : copyStatus === 'loading' ? 'Copying...' : 'Copied'}
+                </Button>
+                <Button
+                    size="sm"
+                    className='h-7'
+                    onClick={download}
+                >
+                    <Download className='h-4 w-4 mr-1' />
+                    Download
+                </Button>
+                <Button
+                    size="sm"
+                    className='h-7'
+                    onClick={clear}
+                >
+                    <X className='h-4 w-4 mr-1' />
+                    Clear
+                </Button>
+            </div>
         </div>
     )
 }

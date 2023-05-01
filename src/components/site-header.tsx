@@ -13,7 +13,7 @@ export function SiteHeader() {
             <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
                 <Link href="/" className="items-center space-x-2 flex mr-6">
                     <Icons.logo className="h-6 w-6" />
-                    <span className="hidden font-bold text-lg sm:inline-block">
+                    <span className="hidden font-bold text-lg sm:inline-block animate-fade-up bg-gradient-to-br from-yellow-500 to-orange-500 bg-clip-text">
                         {siteConfig.name}
                     </span>
                 </Link>
