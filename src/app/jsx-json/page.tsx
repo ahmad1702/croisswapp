@@ -6,8 +6,7 @@
 import { useMemo, useRef, useState } from "react";
 
 import EditorToolbar from '@/components/EditorToolbar';
-import JSONToJSX from "@/components/jsxson/JSONToJSX";
-import JSXToJSON from "@/components/jsxson/JSXToJSON";
+import JSXson from "@/components/jsxson/JSXToJSON";
 import JSXsonHeader from "@/components/jsxson/JSXsonHeader";
 import { Separator } from "@/components/ui/separator";
 import ShowHide from "@/components/ui/show-hide";
@@ -104,8 +103,7 @@ export default function JSXsonPage() {
                     {editMode === 'json-to-jsx' && 'JSX Props'}
                     <EditorToolbar
                         error={error}
-                        copy={copy}
-                        download={download}
+                        copy={toContents !== null ? copy : undefined}
                         clear={clear}
                     />
                 </div>
@@ -132,11 +130,7 @@ export default function JSXsonPage() {
                         )}
                     >
                         {showSecondEditor && (
-                            editMode === 'json-to-jsx' ? (
-                                <JSONToJSX value={toContents} />
-                            ) : (
-                                <JSXToJSON value={toContents} />
-                            )
+                            <JSXson value={toContents} />
                         )}
                     </div>
                 </div>

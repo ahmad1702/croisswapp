@@ -12,20 +12,7 @@ const JSXsonHeader = () => {
                 className="font-cal animate-fade-up bg-gradient-to-br from-yellow-500 to-orange-500 bg-clip-text text-center text-5xl/[3rem] font-bold text-transparent opacity-0 drop-shadow-sm md:text-7xl/[5rem] -mt-4"
                 style={{ animationDelay: "0.20s", animationFillMode: "forwards" }}
             >
-                <Balancer>
-                    <div className='flex items-end whitespace-pre-wrap'>
-                        <div className='inline-block '>
-                            <div className='flex flex-col'>
-                                <div className='inline-block'>JSX</div>
-                            </div>
-                        </div>
-                        <div className='inline-block'>
-                            <div className='flex flex-col items-center'>
-                                <div className='inline-block'>SON</div>
-                            </div>
-                        </div>
-                    </div>
-                </Balancer>
+                <Balancer>JSXSON</Balancer>
             </h1>
             <p
                 className="animate-fade-up text-center text-muted-foreground/80 opacity-0 md:text-xl"
