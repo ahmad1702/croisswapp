@@ -6,28 +6,37 @@ Croisswapp is a web application that allows users to convert code snippets from 
 
 To get started with Croisswapp, follow these steps:
 
-1. Clone this repository to your local machine.
-2. Install the necessary dependencies by running the following command in your terminal:
+1. Clone this repository to your local machine:
+
+   ```
+   git clone https://github.com/ahmad1702/croisswapp.git
+   ```
+2. Open the Cloned Repository's folder:
+
+   ```
+   cd croisswapp
+   ```
+3. Install the necessary dependencies by running the following command in your terminal:
 
    ```
    npm install
    ```
 
-3. Perform the Required Database migrations by running the following command:
+4. Set up your environment variables by creating a `.env` file and adding the required fields which can be found in the `.env.example` file (If you want you can just duplicate the `.env.example` file and rename it to `.env`).
+
+5. Perform the Required Database migrations by running the following command:
 
    ```
    npx prisma db push
    ```
 
-4. Set up your environment variables by creating a `.env` file and adding the required fields which can be found in the `.env.example` file (If you want you can just duplicate the `.env.example` file and rename it to `.env`).
-
-5. Start the development server by running the following command:
+6. Start the development server by running the following command:
 
    ```
    npm run dev
    ```
 
-6. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
+7. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
 
 ## How to Use Croisswapp
 
