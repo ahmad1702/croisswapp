@@ -1,0 +1,274 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Water\n",
+        "1.   List item\n",
+        "2.   List item\n",
+        "---\n",
+        "```\n",
+        "# This is formatted as code\n",
+        "```\n",
+        "water\n",
+        "*   List item\n",
+        "*   List item"
+      ],
+      "metadata": {
+        "id": "FCw6OsxQEp2u"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# This is a comment\n",
+        "\"\"\"\n",
+        "This is a multi-line comment\n",
+        "\"\"\"\n",
+        "\n",
+        "# Import statements\n",
+        "import math\n",
+        "from datetime import datetime"
+      ],
+      "metadata": {
+        "id": "UOp4FncFNDLu"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Variable declaration and assignment\n",
+        "x = 5\n",
+        "y = 3.14\n",
+        "z = \"Hello, World!\""
+      ],
+      "metadata": {
+        "id": "6nFOn-PONI7r"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Data types\n",
+        "a = 3  # Integer\n",
+        "b = 3.14  # Float\n",
+        "c = True  # Boolean\n",
+        "d = \"Hello, World!\"  # String\n",
+        "e = [1, 2, 3]  # List\n",
+        "f = (1, 2, 3)  # Tuple\n",
+        "g = {1, 2, 3}  # Set\n",
+        "h = {\"name\": \"John\", \"age\": 25}  # Dictionary"
+      ],
+      "metadata": {
+        "id": "gEX2_TzmNMEf"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Arithmetic operations\n",
+        "sum = x + y\n",
+        "difference = x - y\n",
+        "product = x * y\n",
+        "quotient = x / y\n",
+        "remainder = x % y\n",
+        "exponentiation = x**y"
+      ],
+      "metadata": {
+        "id": "QT0Ez1uINOMK"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Comparison operators\n",
+        "if x == y:\n",
+        "    print(\"x is equal to y\")\n",
+        "elif x < y:\n",
+        "    print(\"x is less than y\")\n",
+        "else:\n",
+        "    print(\"x is greater than y\")"
+      ],
+      "metadata": {
+        "id": "I-5eZ7zXNQp-"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Logical operators\n",
+        "if x > 0 and y > 0:\n",
+        "    print(\"Both x and y are positive\")\n",
+        "if x > 0 or y > 0:\n",
+        "    print(\"Either x or y is positive\")\n",
+        "if not x == y:\n",
+        "    print(\"x is not equal to y\")"
+      ],
+      "metadata": {
+        "id": "SN-OTERFNTh0"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Membership operators\n",
+        "if \"Hello\" in z:\n",
+        "    print(\"Hello is present in the string\")\n",
+        "if 2 not in e:\n",
+        "    print(\"2 is not present in the list\")"
+      ],
+      "metadata": {
+        "id": "R1WaEXQkNWxY"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Identity operators\n",
+        "if x is y:\n",
+        "    print(\"x and y have the same identity\")\n",
+        "if x is not y:\n",
+        "    print(\"x and y do not have the same identity\")"
+      ],
+      "metadata": {
+        "id": "AMzIR2TlNYjJ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Conditional statements\n",
+        "if x > y:\n",
+        "    print(\"x is greater than y\")\n",
+        "elif x < y:\n",
+        "    print(\"x is less than y\")\n",
+        "else:\n",
+        "    print(\"x is equal to y\")"
+      ],
+      "metadata": {
+        "id": "9gu7rrRHNbuz"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Loops\n",
+        "for i in range(5):\n",
+        "    print(i)\n",
+        "\n",
+        "while x > 0:\n",
+        "    print(x)\n",
+        "    x -= 1"
+      ],
+      "metadata": {
+        "id": "xyIcXUywNeQS"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": ["# Functions\n", "def square(x):\n", "    return x**2"],
+      "metadata": {
+        "id": "cOtvTifYNgtz"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Built-in functions\n",
+        "print(len(z))\n",
+        "print(type(x))\n",
+        "print(str(y))\n",
+        "print(int(b))\n",
+        "print(float(a))\n",
+        "print(list(h.keys()))\n",
+        "print(tuple(e))\n",
+        "print(set(f))\n",
+        "print(abs(-10))\n",
+        "print(max(e))\n",
+        "print(min(g))\n",
+        "print(sum(e))\n",
+        "print(sorted(e))\n",
+        "print(math.pi)\n",
+        "print(datetime.now())"
+      ],
+      "metadata": {
+        "id": "VaEV6_UGNiVM"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Exception handling\n",
+        "try:\n",
+        "    a = 10 / 0\n",
+        "except ZeroDivisionError:\n",
+        "    print(\"Error: Division by zero\")"
+      ],
+      "metadata": {
+        "id": "JRKf2INANkN4"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Class and object\n",
+        "class Person:\n",
+        "    def __init__(self, name, age):\n",
+        "        self.name = name\n",
+        "        self.age = age\n",
+        "\n",
+        "    def greet(self):\n",
+        "        print(\"Hello, my name is \" + self.name)\n",
+        "\n",
+        "\n",
+        "p = Person(\"John\", 25)\n",
+        "p.greet()"
+      ],
+      "metadata": {
+        "id": "DPwgSJ3INnJB"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}

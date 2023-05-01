@@ -183,3 +183,9 @@
 [data-rehype-pretty-code-fragment] .line--highlighted {
   @apply rounded bg-muted-foreground/40 p-1;
 }
+
+.ipynb-viewer > .container {
+  padding: 0 !important;
+  margin: -5px 0;
+  /* display: none; */
+}

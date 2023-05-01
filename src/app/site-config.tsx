@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-    name: "Jupyswapp",
+    name: "Croisswapp",
     description:
         "Convert ipynb files to py files and vice versa.",
     mainNav: [
@@ -10,8 +10,12 @@ export const siteConfig = {
             href: "/",
         },
         {
+            title: "Jupyter Notebook <-> Python",
+            href: "/jupyter-python",
+        },
+        {
             title: "JSX <-> JSON",
-            href: "https://www.npmjs.com/package/jsx-to-json",
+            href: "/jsx-json",
         },
     ],
     sidebarNav: [
