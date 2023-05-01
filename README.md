@@ -1,28 +1,73 @@
-# Create T3 App
+# Croisswapp
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Croisswapp is a web application that allows users to convert code snippets from one format to another. It currently supports conversion between Jupyter Notebook ipynb files to Python files and JSX to JSON files. We are also planning to add support for HTML and JSX conversion in the future.
 
-## What's next? How do I make an app with this?
+## Getting Started
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+To get started with Croisswapp, follow these steps:
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+1. Clone this repository to your local machine.
+2. Install the necessary dependencies by running the following command in your terminal:
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+   ```
+   npm install
+   ```
 
-## Learn More
+3. Perform the Required Database migrations by running the following command:
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+   ```
+   npx prisma db push
+   ```
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+4. Set up your environment variables by creating a `.env` file and adding the required fields which can be found in the `.env.example` file (If you want you can just duplicate the `.env.example` file and rename it to `.env`).
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+5. Start the development server by running the following command:
 
-## How do I deploy this?
+   ```
+   npm run dev
+   ```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+6. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
+
+## How to Use Croisswapp
+
+Using Croisswapp is simple:
+
+1. Choose the format you want to convert from using the dropdown menu.
+2. Paste your code snippet into the input area.
+3. Click the "Convert" button.
+4. Your converted code will appear in the output area.
+
+You can also download your converted code as a file by clicking the "Download" button.
+
+## Supported Formats
+
+Currently, Croisswapp supports conversion between the following formats:
+
+- Jupyter Notebook ipynb files to Python files
+- JSX to JSON files
+
+We are constantly working to add support for more formats, so stay tuned!
+
+## Technologies Used
+
+Croisswapp was built using the following technologies:
+
+- Next.js
+- Prisma
+- Tailwind CSS
+- Next-Auth
+
+## Contributing
+
+We welcome contributions from anyone who is interested in improving Croisswapp! To contribute, follow these steps:
+
+1. Fork this repository.
+2. Create a new branch for your changes.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Create a pull request to merge your changes into the main repository.
+
+## Credits
+
+Croisswapp was created by Ahmad Sandid
