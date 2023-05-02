@@ -18,7 +18,7 @@ const JSXson = ({ value }: JSXToJSONProps) => {
     const isDarkMode = theme === "dark"
     const content: string | null = value === null ? null : "```typescript\n" + value + "\n```"
     return (
-        <div className="h-full w-full relative rounded-xl overflow-hidden">
+        <div className="h-full w-full relative rounded-lg overflow-hidden">
             <Card className="absolute left-0 right-0 h-full w-full overflow-auto">
                 <ReactMarkdown
                     components={{

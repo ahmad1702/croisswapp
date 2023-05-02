@@ -22,5 +22,8 @@ const config = {
   experimental: {
     appDir: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 export default config;

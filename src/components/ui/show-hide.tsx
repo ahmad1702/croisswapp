@@ -19,4 +19,6 @@ const ShowHide = forwardRef<React.ComponentProps<'div'>['ref'], React.ComponentP
     )
 })
 
+ShowHide.displayName = "ShowHide"
+
 export default ShowHide
