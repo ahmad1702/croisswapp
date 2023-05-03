@@ -2,6 +2,7 @@ import { siteConfig } from "@/app/site-config";
 import { SiteHeader } from "@/components/site-header";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
+import Footer from "@/components/ui/footer";
 import "@/styles/globals.css";
 import { cn } from "@/utils/cn";
 
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                         </div>
                         <TailwindIndicator />
                     </ThemeProvider>
+                    <Footer />
                 </body>
             </html>
         </>

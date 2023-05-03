@@ -1,3 +1,4 @@
+'use client'
 import { cn } from '@/utils/cn'
 import { Transition } from '@headlessui/react'
 import { forwardRef } from 'react'
@@ -18,5 +19,7 @@ const ShowHide = forwardRef<React.ComponentProps<'div'>['ref'], React.ComponentP
         </Transition>
     )
 })
+
+ShowHide.displayName = "ShowHide"
 
 export default ShowHide

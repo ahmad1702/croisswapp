@@ -1,11 +1,10 @@
 
-"use client"
 import Balancer from "react-wrap-balancer";
 
 import { cn } from "@/utils/cn";
 
-const JSXsonHeader = () => {
-    const description = 'JSXson is a converter between JSX Props and a JSON object whose keys are the same as the JSX Props.'
+export type ConversionPageHeaderProps = { title: string, description: string }
+const ConversionPageHeader = ({ title, description }: ConversionPageHeaderProps) => {
     return (
         <div className={cn("w-full lg:max-w-5xl mx-auto")}>
             <div className="md:flex md:items-end md:gap-4">
@@ -15,7 +14,7 @@ const JSXsonHeader = () => {
                 >
                     Croisswapp:
                 </h1>
-                <h2 className="text-3xl md:text-4xl font-bold leading-tightest mb-3"> JSX {`<-->`} JSON</h2>
+                <h2 className="text-3xl md:text-4xl font-bold leading-tightest mb-3">{title}</h2>
             </div>
             <p
                 className="animate-fade-up md:text-center text-muted-foreground/80 opacity-0 md:text-xl"
@@ -27,4 +26,4 @@ const JSXsonHeader = () => {
     )
 }
 
-export default JSXsonHeader;
+export default ConversionPageHeader;

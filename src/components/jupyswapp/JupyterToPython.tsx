@@ -18,7 +18,7 @@ const JupyterToPython = ({ value }: JupyterToPythonProps) => {
   const isDarkMode = theme === "dark"
   const content: string | null = value === null ? null : "```python\n" + value + "\n```"
   return (
-    <div className="h-full w-full relative rounded-xl overflow-hidden">
+    <div className="h-full w-full relative rounded-lg overflow-hidden">
       <Card className="absolute left-0 right-0 h-full w-full overflow-auto">
         <ReactMarkdown
           components={{
@@ -41,7 +41,6 @@ const JupyterToPython = ({ value }: JupyterToPythonProps) => {
             }
           }}
         >
-          {/* hi */}
           {content === null ? "Nothing... Nada... No tengo" : content}
         </ReactMarkdown>
       </Card>

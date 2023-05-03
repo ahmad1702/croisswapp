@@ -1,20 +1,19 @@
+"use client"
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-"use client"
 import { useMemo, useRef, useState } from "react";
 
 import EditorToolbar from '@/components/EditorToolbar';
-import JupyterPythonHeader from '@/components/jupyswapp/JupyterPythonHeader';
+import ConversionLayout from "@/components/conversion-layout";
 import JupyterToPython from '@/components/jupyswapp/JupyterToPython';
 import PythonToJupyter from '@/components/jupyswapp/PythonToJupyter';
 import { Separator } from "@/components/ui/separator";
 import ShowHide from "@/components/ui/show-hide";
-import { Textarea } from "@/components/ui/text-area";
 import { sampleJupyterNotebook } from '@/data/sampleJupyterNotebook';
 import { Notebook } from "@/types/jupyter";
-import { cn } from "@/utils/cn";
 import pythonToJupyter, { jupyterToPython } from '@/utils/jupyter';
 
 
@@ -25,7 +24,6 @@ export default function JupyterPythonPage() {
     const [error, setError] = useState<string | undefined>(undefined)
     const [editMode, setEditMode] = useState<JupySwapEditMode>('none')
     const [fromContents, setFromContents] = useState(sampleJupyterNotebook)
-
 
     const handleFromContentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (e.target.value.length === 0) {
@@ -56,12 +54,14 @@ export default function JupyterPythonPage() {
     }, [editMode, fromContents])
 
     const copy = async () => {
+        if (typeof window === 'undefined') return
         if (toContents) {
             await navigator.clipboard.writeText(typeof toContents === 'string' ? toContents : JSON.stringify(toContents))
         }
     }
 
     const download = () => {
+        if (typeof window === 'undefined') return
         const element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(typeof toContents === 'string' ? toContents : JSON.stringify(toContents)));
         const fileName = 'jupyswapp' + (editMode === 'jupyter-to-py' ? '.py' : '.ipynb')
@@ -86,15 +86,24 @@ export default function JupyterPythonPage() {
     }
 
     return (
-        <section
-            className={cn(
-                "overflow-hidden h-[calc(100vh-4rem)] flex items-center flex-col container",
-                showSecondEditor ? 'p-5 gap-4' : 'gap-6 pb-8 pt-6 md:py-10',
-            )}
+        <ConversionLayout
+            ref={inputRef}
+            title={"Jupyter ↔ Python"}
+            description={"Convert Jupyter Notebooks to Python scripts and vice versa."}
+            onFromContentsChange={handleFromContentsChange}
+            collapsed={showSecondEditor}
+            secondEditor={
+                editMode === 'py-to-jupyter' ? (
+                    <PythonToJupyter
+                        value={toContents as Notebook}
+                    />
+                ) : (
+                    <JupyterToPython
+                        value={toContents as string | null}
+                    />
+                )
+            }
         >
-            <ShowHide show={!showSecondEditor}>
-                <JupyterPythonHeader />
-            </ShowHide>
             <ShowHide show={showSecondEditor} className="w-full flex h-8">
                 <div className="flex-1 font-bold text-xl flex justify-end">
                     {editMode === 'jupyter-to-py' && 'Jupyter Notebook'}
@@ -116,41 +125,6 @@ export default function JupyterPythonPage() {
                     />
                 </div>
             </ShowHide>
-            <div className="w-full flex-1 flex flex-col items-center justify-center gap-2">
-                <div className={cn("flex flex-1 w-full", showSecondEditor && 'gap-2')}>
-                    <div
-                        className={cn(
-                            "duration-500",
-                            showSecondEditor ? 'w-1/2' : 'w-full',
-                        )}
-                    >
-                        <Textarea
-                            ref={inputRef}
-                            className="h-full resize-none"
-                            placeholder="Drag and drop or Paste in the contents of a .ipynb or .py file here"
-                            onChange={handleFromContentsChange}
-                        />
-                    </div>
-                    <div
-                        className={cn(
-                            "duration-500 h-full",
-                            showSecondEditor ? 'w-1/2' : 'w-0'
-                        )}
-                    >
-                        {showSecondEditor && (
-                            editMode === 'py-to-jupyter' ? (
-                                <PythonToJupyter
-                                    value={toContents as Notebook}
-                                />
-                            ) : (
-                                <JupyterToPython
-                                    value={toContents as string | null}
-                                />
-                            )
-                        )}
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+        </ConversionLayout>
+    )
 }
