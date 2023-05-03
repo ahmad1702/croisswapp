@@ -50,12 +50,11 @@ const ConversionInput = forwardRef<HTMLTextAreaElement, ConversionInputProps>(({
         }
     }
 
-
     return (
         <div className='relative h-full'>
             <div className='absolute h-full w-full flex items-center justify-center pointer-events-none flex-col gap-2'>
                 {
-                    textAreaRef?.value === '' && (
+                    !textAreaRef || textAreaRef.value === undefined || !(textAreaRef.value.length > 0) && (
                         isDragActive ? (
                             <>
                                 <Paperclip className='h-10 w-10' />
