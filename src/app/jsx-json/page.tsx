@@ -5,8 +5,9 @@
 "use client"
 import { useMemo, useRef, useState } from "react";
 
-import ConversionLayout from "@/components/conversion-layout";
 import EditorToolbar from '@/components/EditorToolbar';
+import ConversionInput from "@/components/conversion-input";
+import ConversionLayout from "@/components/conversion-layout";
 import JSXson from "@/components/jsxson/JSXToJSON";
 import { Separator } from "@/components/ui/separator";
 import ShowHide from "@/components/ui/show-hide";
@@ -63,16 +64,21 @@ export default function JSXsonPage() {
         }
     }
 
+    const inputSection = (
+        <ConversionInput
+            ref={inputRef}
+            onFromContentsChange={handleFromContentsChange}
+            acceptableFileExtensions={' .json, .tsx or .jsx'}
+        />
+    )
+
     return (
         <ConversionLayout
-            ref={inputRef}
             title={`JSX <--> JSON`}
             description="A converter between JSX Props and a JSON object whose keys are the same as the JSX Props."
-            onFromContentsChange={handleFromContentsChange}
             collapsed={showSecondEditor}
-            secondEditor={
-                <JSXson value={toContents} />
-            }
+            secondEditor={<JSXson value={toContents} />}
+            inputSection={inputSection}
         >
             <ShowHide show={showSecondEditor} className="w-full flex h-8">
                 <div className="flex-1 font-bold text-xl flex justify-end">

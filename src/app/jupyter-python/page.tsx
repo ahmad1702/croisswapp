@@ -7,6 +7,7 @@
 import { useMemo, useRef, useState } from "react";
 
 import EditorToolbar from '@/components/EditorToolbar';
+import ConversionInput from "@/components/conversion-input";
 import ConversionLayout from "@/components/conversion-layout";
 import JupyterToPython from '@/components/jupyswapp/JupyterToPython';
 import PythonToJupyter from '@/components/jupyswapp/PythonToJupyter';
@@ -15,8 +16,6 @@ import ShowHide from "@/components/ui/show-hide";
 import { sampleJupyterNotebook } from '@/data/sampleJupyterNotebook';
 import { Notebook } from "@/types/jupyter";
 import pythonToJupyter, { jupyterToPython } from '@/utils/jupyter';
-
-
 
 export type JupySwapEditMode = 'jupyter-to-py' | 'py-to-jupyter' | 'none'
 export default function JupyterPythonPage() {
@@ -85,12 +84,18 @@ export default function JupyterPythonPage() {
         }
     }
 
+    const inputSection = (
+        <ConversionInput
+            ref={inputRef}
+            onFromContentsChange={handleFromContentsChange}
+            acceptableFileExtensions={' .py or .ipynb'}
+        />
+    )
+
     return (
         <ConversionLayout
-            ref={inputRef}
             title={"Jupyter ↔ Python"}
             description={"Convert Jupyter Notebooks to Python scripts and vice versa."}
-            onFromContentsChange={handleFromContentsChange}
             collapsed={showSecondEditor}
             secondEditor={
                 editMode === 'py-to-jupyter' ? (
@@ -103,6 +108,7 @@ export default function JupyterPythonPage() {
                     />
                 )
             }
+            inputSection={inputSection}
         >
             <ShowHide show={showSecondEditor} className="w-full flex h-8">
                 <div className="flex-1 font-bold text-xl flex justify-end">
