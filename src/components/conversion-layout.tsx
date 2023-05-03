@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
-import { forwardRef, useRef } from "react";
+import { forwardRef } from "react";
 
 import ShowHide from "@/components/ui/show-hide";
-import { Textarea } from "@/components/ui/text-area";
 import { cn } from "@/utils/cn";
 import React from 'react';
 import ConversionPageHeader, { ConversionPageHeaderProps } from "./conversion-page-header";
@@ -12,19 +11,19 @@ type ConversionLayoutProps = ConversionPageHeaderProps & {
     collapsed: boolean;
     secondEditor: React.ReactNode;
     children: React.ReactNode | React.ReactNodeArray;
-    onFromContentsChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    inputSection: React.ReactNode;
 }
 
-const ConversionLayout = forwardRef<HTMLTextAreaElement, ConversionLayoutProps>(({
+const ConversionLayout = forwardRef<HTMLDivElement, ConversionLayoutProps>(({
     collapsed,
     children,
-    onFromContentsChange,
     secondEditor,
+    inputSection,
     ...conversionPageHeaderProps
 }, ref) => {
-    const inputRef = ref || useRef<HTMLTextAreaElement>(null)
     return (
         <section
+            ref={ref}
             className={cn(
                 "overflow-hidden h-[calc(100vh-4rem)] flex items-center flex-col container",
                 collapsed ? 'p-5 gap-4' : 'gap-6 pb-8 pt-6 md:py-10',
@@ -42,12 +41,7 @@ const ConversionLayout = forwardRef<HTMLTextAreaElement, ConversionLayoutProps>(
                             collapsed ? 'w-1/2' : 'w-full',
                         )}
                     >
-                        <Textarea
-                            ref={inputRef}
-                            className="h-full resize-none"
-                            placeholder="Drag and drop or Paste in the contents of a .ipynb or .py file here"
-                            onChange={onFromContentsChange}
-                        />
+                        {inputSection}
                     </div>
                     <div
                         className={cn(
