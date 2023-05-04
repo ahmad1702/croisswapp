@@ -46,22 +46,35 @@ export function MobileDropdown(props: {
         <ScrollArea className="pb-8">
           {props.items.docs.map((item, index) => (
             <div key={index} className="flex flex-col space-y-3 pt-6">
-              <h4 className="font-bold">{item.title}</h4>
-              {item?.items?.length &&
-                item.items.map((item) => (
-                  <PopoverClose asChild key={item.href}>
-                    {item.href ? (
+              {item.href !== undefined ? (
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "flex py-1 text-base font-medium text-muted-foreground transition-colors hover:text-primary",
+                    item.href === pathname && "text-foreground"
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.title}
+                </Link>
+              ) : (
+                <h4 className="font-bold">{item.title}</h4>
+              )}
+              {item?.items?.length > 0 &&
+                item.items.map((subItem) => (
+                  <PopoverClose asChild key={subItem.href}>
+                    {subItem.href ? (
                       <Link
-                        href={item.href}
+                        href={subItem.href}
                         className={cn(
                           "flex py-1 text-base font-medium text-muted-foreground transition-colors hover:text-primary",
-                          item.href === pathname && "text-foreground"
+                          subItem.href === pathname && "text-foreground"
                         )}
                       >
-                        {item.title}
+                        {subItem.title}
                       </Link>
                     ) : (
-                      item.title
+                      subItem.title
                     )}
                   </PopoverClose>
                 ))}
