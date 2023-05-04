@@ -50,11 +50,13 @@ const ConversionInput = forwardRef<HTMLTextAreaElement, ConversionInputProps>(({
         }
     }
 
+    const showDragDropPrompt = !textAreaRef || textAreaRef.value === undefined || !(textAreaRef.value.length > 0)
+
     return (
         <div className='relative h-full'>
             <div className='absolute h-full w-full flex items-center justify-center pointer-events-none flex-col gap-2'>
                 {
-                    !textAreaRef || textAreaRef.value === undefined || !(textAreaRef.value.length > 0) && (
+                    showDragDropPrompt && (
                         isDragActive ? (
                             <>
                                 <Paperclip className='h-10 w-10' />
