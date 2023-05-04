@@ -15,6 +15,7 @@ const ConversionInput = forwardRef<HTMLTextAreaElement, ConversionInputProps>(({
     const [isDragActive, setIsDragActive] = useState(false)
 
     const textAreaRef = (ref as RefObject<HTMLTextAreaElement>).current
+
     const handleFile = (file: File) => {
         console.log()
         const reader = new FileReader();
@@ -50,12 +51,13 @@ const ConversionInput = forwardRef<HTMLTextAreaElement, ConversionInputProps>(({
         }
     }
 
+    const showDragDropPrompt = !textAreaRef || textAreaRef.value === undefined || !(textAreaRef.value.length > 0)
 
     return (
         <div className='relative h-full'>
-            <div className='absolute h-full w-full flex items-center justify-center pointer-events-none flex-col gap-2'>
+            <div className='absolute h-full w-full flex items-center justify-center pointer-events-none flex-col gap-2 p-3'>
                 {
-                    textAreaRef?.value === '' && (
+                    showDragDropPrompt && (
                         isDragActive ? (
                             <>
                                 <Paperclip className='h-10 w-10' />
@@ -66,7 +68,7 @@ const ConversionInput = forwardRef<HTMLTextAreaElement, ConversionInputProps>(({
                         ) : (
                             <>
                                 <ClipboardEdit className='h-10 w-10 pointer-events-none' />
-                                <div className='font-semibold pointer-events-none'>
+                                <div className='font-semibold pointer-events-none text-center'>
                                     Drag and drop or Paste in the contents of a{acceptableFileExtensions} file here
                                 </div>
                                 <input
