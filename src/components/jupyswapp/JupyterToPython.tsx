@@ -10,38 +10,19 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { Card } from "../ui/card";
 
 type JupyterToPythonProps = {
-  // ipynbJson: string;
   value: string | null;
-  // onChange: (value: string | null) => void;
 };
 
-const JupyterToPython = ({ value, ...props }: JupyterToPythonProps) => {
+const JupyterToPython = ({ value }: JupyterToPythonProps) => {
   const { theme } = useTheme()
   const isDarkMode = theme === "dark"
   const content: string | null = value === null ? null : "```python\n" + value + "\n```"
-
-  // console.log(value)
-  // useEffect(() => {
-  //   try {
-  //     const parsedPython = jupyterToPython(ipynbJson);
-  //     if (parsedPython) {
-  //       onChange('```python\n' + parsedPython + '\n```')
-  //     }
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  //   onChange(null)
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [ipynbJson])
-
-  // console.log(contents)
-  console.log(isDarkMode)
   return (
     <div className="h-full w-full relative rounded-xl overflow-hidden">
       <Card className="absolute left-0 right-0 h-full w-full overflow-auto">
         <ReactMarkdown
           components={{
-            code({ node, inline, className, children, ...props }) {
+            code({ inline, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || '')
               return !inline && match ? (
                 <SyntaxHighlighter
@@ -66,14 +47,6 @@ const JupyterToPython = ({ value, ...props }: JupyterToPythonProps) => {
       </Card>
     </div>
   )
-  // return (
-  //   <Textarea
-  //     readOnly
-  //     value={contents === null ? "Nothing... Nada... No tengo" : contents}
-  //     className={cn("h-full resize-none")}
-  //     placeholder="Drag and drop or Paste in the contents of a .ipynb or .py file here"
-  //   />
-  // );
 };
 
 export default JupyterToPython;
